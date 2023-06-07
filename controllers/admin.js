@@ -9,7 +9,11 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   console.log("redirecting you to deeezzzznuts");
-  const product = new Product(req.body.title, "this is me mario");
+  const title = req.body.title;
+  const imageUrl = req.body.imageUrl;
+  const price = req.body.price;
+  const description = req.body.description;
+  const product = new Product(title, imageUrl, description, price);
   product.save();
   res.redirect("/");
   console.log(req.body);
@@ -20,10 +24,10 @@ exports.getProducts = (req, res, next) => {
     console.log(products);
 
     //console.log("nom nom......");
-    res.render("shop/product-list", {
+    res.render("admin/products", {
       prods: products,
-      pageTitle: "Shop page",
-      path: "/",
+      pageTitle: "Admin page",
+      path: "/admin/products",
     });
   });
 };
